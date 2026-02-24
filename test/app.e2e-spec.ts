@@ -34,7 +34,7 @@ describe('AppController (e2e)', () => {
 
     it('POST /todos', () => {
       return request(app.getHttpServer())
-        .post('/todos')
+        .post('/todos?apiKey=dummy_api_key_for_testing_12345')
         .send({ title: 'E2E Test Todo', description: 'From E2E' })
         .expect(201)
         .then((response) => {
@@ -46,7 +46,7 @@ describe('AppController (e2e)', () => {
 
     it('GET /todos', () => {
       return request(app.getHttpServer())
-        .get('/todos')
+        .get('/todos?apiKey=dummy_api_key_for_testing_12345')
         .expect(200)
         .then((response) => {
           expect(Array.isArray(response.body)).toBe(true);
@@ -55,7 +55,7 @@ describe('AppController (e2e)', () => {
 
     it('GET /todos/:id', () => {
       return request(app.getHttpServer())
-        .get(`/todos/${createdTodoId}`)
+        .get(`/todos/${createdTodoId}?apiKey=dummy_api_key_for_testing_12345`)
         .expect(200)
         .then((response) => {
           const body = response.body as Todo;
@@ -65,7 +65,7 @@ describe('AppController (e2e)', () => {
 
     it('PATCH /todos/:id', () => {
       return request(app.getHttpServer())
-        .patch(`/todos/${createdTodoId}`)
+        .patch(`/todos/${createdTodoId}?apiKey=dummy_api_key_for_testing_12345`)
         .send({ isCompleted: true })
         .expect(200)
         .then((response) => {
@@ -76,12 +76,16 @@ describe('AppController (e2e)', () => {
 
     it('DELETE /todos/:id', () => {
       return request(app.getHttpServer())
-        .delete(`/todos/${createdTodoId}`)
+        .delete(
+          `/todos/${createdTodoId}?apiKey=dummy_api_key_for_testing_12345`,
+        )
         .expect(200);
     });
 
     it('GET /todos/:id (Not Found)', () => {
-      return request(app.getHttpServer()).get('/todos/9999').expect(404);
+      return request(app.getHttpServer())
+        .get('/todos/9999?apiKey=dummy_api_key_for_testing_12345')
+        .expect(404);
     });
   });
 });
