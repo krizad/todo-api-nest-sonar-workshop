@@ -1,0 +1,37 @@
+trigger:
+  branches:
+    include:
+      - dev
+      
+pr:
+  branches:
+    include:
+      - dev
+
+pool:
+  vmImage: "ubuntu-latest"
+
+steps:
+  - checkout: self
+    fetchDepth: 0
+
+  - task: NodeTool@0
+    inputs:
+      versionSpec: "18.x"
+
+  - script: |
+      npm install -g @sonar/scan
+
+      sonar \
+        -Dsonar.host.url=$(SONAR_HOST_URL) \
+        -Dsonar.token=$(SONAR_TOKEN) \
+        -Dsonar.projectKey=todo-api \
+        -Dsonar.projectName="Todo API" \
+        -Dsonar.projectVersion=1.0 \
+        -Dsonar.scm.disabled=true \
+        -Dsonar.sources=src \
+        -Dsonar.tests=src \
+        -Dsonar.test.inclusions="**/*.spec.ts" \
+        -Dsonar.sourceEncoding=UTF-8 \
+        -Dsonar.exclusions="**/node_modules/**, **/dist/**, **/test/**, **/*.module.ts, main.ts"
+    displayName: "Run Sonar Scan"
