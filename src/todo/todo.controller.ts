@@ -43,6 +43,20 @@ export class TodoController {
     return todo;
   }
 
+  // SonarQube Duplication
+  @Get('duplicated/:id')
+  @ApiOperation({ summary: 'Get todo by id duplicated' })
+  @ApiParam({ name: 'id', description: 'The ID of the todo' })
+  @ApiResponse({ status: 200, description: 'Return the todo.' })
+  @ApiResponse({ status: 404, description: 'Todo not found.' })
+  async getTodoByIdDuplicated(@Param('id') id: string): Promise<TodoModel> {
+    const todo = await this.todoService.todo({ id: Number(id) });
+    if (!todo) {
+      throw new NotFoundException(`Todo with ID ${id} not found`);
+    }
+    return todo;
+  }
+
   @Post()
   @ApiOperation({ summary: 'Create a new todo' })
   @ApiBody({

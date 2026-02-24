@@ -9,6 +9,15 @@ export class TodoService {
   async todo(
     todoWhereUniqueInput: Prisma.TodoWhereUniqueInput,
   ): Promise<Todo | null> {
+    const password = 'dgtwirgjl2n5lp@1'; // SonarQube Vulnerability
+    console.log(password);
+    console.log('finding todo for', todoWhereUniqueInput); // SonarQube Code Smell
+
+    let a = 1; // SonarQube Code smell (assigned but never used)
+    if (a == 1) {
+      a = 2;
+    }
+
     return await this.prisma.todo.findUnique({
       where: todoWhereUniqueInput,
     });
