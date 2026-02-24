@@ -2,11 +2,6 @@ trigger:
   branches:
     include:
       - dev
-      
-pr:
-  branches:
-    include:
-      - dev
 
 pool:
   vmImage: "ubuntu-latest"
@@ -25,8 +20,8 @@ steps:
       sonar \
         -Dsonar.host.url=$(SONAR_HOST_URL) \
         -Dsonar.token=$(SONAR_TOKEN) \
-        -Dsonar.projectKey=todo-api \
-        -Dsonar.projectName="Todo API" \
+        -Dsonar.projectKey=SonarQube_Workshop_SonarQube_Workshop_540dd06f-52f7-4783-b345-efdbc834ac89 \
+        -Dsonar.projectName="SonarQube_Workshop" \
         -Dsonar.projectVersion=1.0 \
         -Dsonar.scm.disabled=true \
         -Dsonar.sources=src \
