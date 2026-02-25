@@ -19,7 +19,7 @@ import {
   ApiQuery,
 } from '@nestjs/swagger';
 import { TodoService } from './todo.service';
-import { Todo as TodoModel } from '@prisma/client';
+import { Todo as TodoModel } from './todo.interface';
 
 @ApiTags('todos')
 @Controller('todos')
