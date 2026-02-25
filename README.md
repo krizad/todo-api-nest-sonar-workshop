@@ -37,22 +37,24 @@ prisma/
 ```bash
 npm install
 ```
+For workshop prerequisites and platform-specific install instructions, see `required.md` in the project root.
 
-### 2. Database Migration
-
-Ensure your database is up to date:
-
-```bash
-npx prisma migrate dev
+# Sonar scanner (example - adjust if you prefer a different scanner package)
+npm install -g sonar/scan
 ```
 
-### 3. Environment Variables
-
-Copy `.env.example` to `.env` and configure accordingly.
+Verify installations:
 
 ```bash
-cp .env.example .env
+git --version
+docker --version
+docker compose version
+node -v
+npm -v
 ```
+
+Note: Docker Desktop must be running if you plan to run a local SonarQube server/container during the workshop.
+
 
 ## Running the App
 
